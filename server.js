@@ -11,7 +11,6 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
     const agent = agents.find(a => a.email === email && a.password === password);
@@ -38,9 +37,8 @@ function authenticateToken(req, res, next) {
 }
 
 app.get('/user.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'restricted.html'));
+    res.sendFile(path.join(__dirname, 'public', 'user.html'));
 });
-
 
 app.get('/user', authenticateToken, (req, res) => {
     res.send(`Bienvenido, ${req.user.email}`);
